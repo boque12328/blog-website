@@ -1,0 +1,34 @@
+<div class="row row-cols-1 g-3">
+    <% posts.forEach(post => { %>
+      <div class="col">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h5 class="card-title"><%= post.title %></h5>
+            <p class="card-text"><%= post.content %></p>
+            <div class="text-muted">by <%= post.author %></div>
+            <% if (currentUser && post.author === currentUser) { %>
+              <form action="/posts/<%= post.id %>?_method=DELETE" method="POST" class="d-inline">
+                <button class="btn btn-sm btn-danger mt-2">Delete</button>
+              </form>
+              <button class="btn btn-sm btn-warning mt-2" data-bs-toggle="modal" data-bs-target="#editModal-<%= post.id %>">Edit</button>
+  
+              <!-- Edit Modal -->
+              <div class="modal fade" id="editModal-<%= post.id %>" tabindex="-1">
+                <div class="modal-dialog">
+                  <form action="/posts/<%= post.id %>?_method=PUT" method="POST" class="modal-content">
+                    <div class="modal-header"><h5 class="modal-title">Edit Post</h5></div>
+                    <div class="modal-body">
+                      <input type="text" name="title" class="form-control mb-2" value="<%= post.title %>" required>
+                      <textarea name="content" class="form-control" required><%= post.content %></textarea>
+                    </div>
+                    <div class="modal-footer"><button class="btn btn-primary">Save</button></div>
+                  </form>
+                </div>
+              </div>
+            <% } %>
+          </div>
+        </div>
+      </div>
+    <% }); %>
+  </div>
+  

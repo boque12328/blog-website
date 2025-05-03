@@ -1,0 +1,23 @@
+<%- include('partials/header') %>
+
+<h1>My Posts</h1>
+<%- include('partials/posts-list', { posts, currentUser }) %>
+
+
+<!-- Add Post Modal Button and Modal -->
+<button class="btn btn-primary mt-4" data-bs-toggle="modal" data-bs-target="#addPostModal">Add New Post</button>
+
+<div class="modal fade" id="addPostModal" tabindex="-1">
+  <div class="modal-dialog">
+    <form action="/posts" method="POST" class="modal-content">
+      <div class="modal-header"><h5 class="modal-title">New Post</h5></div>
+      <div class="modal-body">
+        <input type="text" name="title" class="form-control mb-2" placeholder="Title" required>
+        <textarea name="content" class="form-control" placeholder="Content" required></textarea>
+      </div>
+      <div class="modal-footer"><button class="btn btn-success">Post</button></div>
+    </form>
+  </div>
+</div>
+
+<%- include('partials/footer') %>
